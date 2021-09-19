@@ -1,0 +1,77 @@
+import {
+  useState,
+  useEffect,
+  useRef,
+  ChangeEvent,
+  FC
+} from 'react'
+import SearchIcon from '@material-ui/icons/Search';
+import '../styles/search.styles.scss'
+
+interface userData {
+  name: string;
+  email: string;
+  ssn: string;
+}
+
+interface userDataProps {
+  data: []
+}
+
+export const Search: FC<userDataProps> = ({data}) => {
+  const [query, setQuery] = useState({foundUsers: [], text: ''})
+  const [visible, setVisible] = useState<boolean>(false)
+
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+
+    let foundUsers = []
+
+    if( value.length > 0 ){
+      const queryName = new RegExp(`^${value}`, 'i')
+      foundUsers = data.sort().filter((val: userData) => queryName.test(val.name))
+      setVisible(true)
+    }else{
+      setVisible(false)
+    }
+    // setVisible(true)
+    setQuery({ foundUsers, text: value })
+  }
+
+  const { foundUsers } = query
+
+    //remove the rest on select and show selected name
+    const handleSelect = (value: userData) => {
+      setVisible(false)
+      setQuery({
+        text: value.name,
+        foundUsers: []
+      });
+    };
+
+  
+  return  (
+    <form>
+      <SearchIcon />
+      <input
+        type="text"
+        autoComplete="false"
+        placeholder="search members"
+        className="input-search"
+        name="name"
+        onChange={handleChange}
+        style={{visibility: 'visible'}}
+        value={query.text} />
+        <ul 
+          className="user-list"
+          style={{visibility: visible ? 'visible' : 'hidden'}}>
+          {
+            foundUsers.map((user) => {
+              return <li key={user.ssn} onClick={() => handleSelect(user)}>{user.name}</li>
+            })
+          }
+        </ul>
+    </form>
+  )
+}

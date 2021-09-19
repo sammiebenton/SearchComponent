@@ -1,16 +1,16 @@
 import React from 'react';
-import './App.css';
-import { DataProvider, useData } from './context/DataContext';
-import {RawSearchComponent} from './components/RawSearchComponent';
-
-import data from './data/contacts.data.json'
+import { SearchComponent } from './components/SearchComponent';
+import { UserContextProvider, useUserContext } from './context/UserContext'
+import './styles/App.scss';
+import data from './data/users.json'
 
 function App() {
+
+  const setUser = useUserContext()
+
   return (
     <div className="App">
-      {/* <DataProvider> */}
-        <RawSearchComponent data={data}/>
-      {/* </DataProvider> */}
+      <SearchComponent data={data}/>
     </div>
   );
 }

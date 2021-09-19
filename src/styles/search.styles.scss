@@ -3,58 +3,54 @@ $border_active: #2823FB;
 $default_text: #98A4C5;
 $default_bg: #F3F7FF;
 
-.search-wrapper{
-
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  width: 314px;
-  height: 56px;
-  padding: 0.5rem;
-  background-color: $default_bg;
-
-  border: $dafault_border solid 1px;
-  border-radius: 0.3rem;
-
-  &:focus, &:active, &:hover{
-    border: $border_active solid 1px;
-    outline: $border_active;
-  }
-
-  svg {
+form{
+  position: absolute;
+  svg.fa-search{
+    position: absolute;
+    margin-left: 0.8rem;
+    margin-top: 1.2rem;
     font-size: 1rem;
-    float: left;
     color: $border_active;
   }
   input{
-    &.search-input{
-      height: fit-content;
-      width: 100vw;
-      border: none;
-      outline: none;
-      padding-left: 0.5rem;
+    &.input-search{
+      height: 56px;
+      width: 314px;
+      background: $default_bg;
+      padding-left: 3em;
+      border-radius: 0.2rem;
+      // padding: 0px 55px;
       color: $default_text;
-      background-color: $default_bg;
+      &:hover, &:active, &:focus{
+        outline: $border_active;
+        border: 2px solid $border_active;
+        border-radius: 2px;
+      }
     }
-    &[placeholder]{
+    &placeholder{
       color: $default_text;
     }
   }
-}
-
-.user-list{
-  background-color: #FFFFFF;
-  width: 314px;
-  padding: 0.55rem;
-  margin: 1rem 0rem;
-  box-shadow: 0rem 1rem 2rem #ddd;
   ul{
-    list-style-type: none;
-    padding: 0.2rem;
-    height: 3rem;
+    &.user-list{
+      width: 319px;
+      box-shadow: 0px 10px 15px 0px rgba(196, 196, 196, 0.8);
+      list-style-type: none;
+      padding: 1rem 0rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
     li{
-      padding: 1rem;
+      text-align: left;
+      width: 298px;
+      height: 68px;
+      padding: 1rem 0rem;
+      &:first-child{
+        background: $default_bg;
+      }
       &:hover{
         background-color: $default_bg;
       }
@@ -62,6 +58,7 @@ $default_bg: #F3F7FF;
         font-size: 1rem;
         color: $default_text;
         line-height: 1px;
+        padding: 0rem 1rem;
         &:first-child{
           color: #131313;
           padding-bottom: 1rem;
